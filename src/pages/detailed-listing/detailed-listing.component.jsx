@@ -77,40 +77,31 @@ class DetailedListing extends Component {
 
 
                         <Row className="my-5">
-                            { apiData.content.rendered ? ` 
-                                <Col>
-                                    <h5 className="border-bottom pb-2">Description</h5>
-                                    ${ parse(apiData.content.rendered) }
-                                </Col>
-                            ` : ''}
-                            { apiData.acf.specials ? `
-                                <Col>
-                                    <h5 className="border-bottom pb-2">Specials</h5>
-                                    <p>${ apiData.acf.specials }</p>
-                                </Col>
-                            ` : ''}
+                            <Col>
+                                <h5 className="border-bottom pb-2">Description</h5>
+                                ${ parse(apiData.content.rendered) }
+                            </Col>
+                            <Col>
+                                <h5 className="border-bottom pb-2">Specials</h5>
+                                <p>${ apiData.acf.specials }</p>
+                            </Col>
                         </Row>
                         
                         <Row className="my-5">
                             <Cta headline={'Find Events'} content={'Events text'} buttonText={'See Events'} />
                         </Row>
 
-                        { apiData.content.rendered || apiData.acf.specials ? `
-                            <Row className="my-5">
-                                ${ apiData.acf.beers ? `
-                                    <Col md="6">
-                                        <h6 className="border-bottom pb-2">On Tap</h6>
-                                        <p>${ apiData.acf.beers }</p>
-                                    </Col>
-                                ` : ''}
-                                ${ apiData.acf.beers ? `
-                                    <Col md="6">
-                                        <h6 className="border-bottom pb-2">Food Truck Schedule</h6>
-                                        <p>${ apiData.acf.foodtrucks }</p>
-                                    </Col>
-                                ` : ''}
-                            </Row>
-                        ` : ''}
+                        <Row className="my-5">
+                            <Col md="6">
+                                <h6 className="border-bottom pb-2">On Tap</h6>
+                                <p>${ apiData.acf.beers }</p>
+                            </Col>
+                            <Col md="6">
+                                <h6 className="border-bottom pb-2">Food Truck Schedule</h6>
+                                <p>${ apiData.acf.foodtrucks }</p>
+                            </Col>
+                        </Row>
+
 
                         <Row className="my-5">
                             <Cta headline={'Book a Tour'} content={'Tour text'} buttonText={'Book Now!'} />
