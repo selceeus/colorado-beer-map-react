@@ -147,6 +147,8 @@ class Header extends Component {
                                 <NavItem>
                                     <NavLink className="nav-link" to="/map">Map</NavLink>
                                 </NavItem>
+                                <span className="navbar-text ml-auto">
+                            </span>
                             </Nav>
                         </Collapse>
                     </div>
