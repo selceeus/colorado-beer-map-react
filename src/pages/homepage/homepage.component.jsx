@@ -11,9 +11,9 @@ const Homepage = props => {
         <section className='homepage'>
             <HomeHero headline={'Get Started'} content={'test'} buttonText={'test'} />
             <Featured />
-            <Cta headline={'Book a Tour'} content={'Tour text'} buttonText={'Book Now!'} />
+            {/*<Cta headline={'Book a Tour'} content={'Tour text'} buttonText={'Book Now!'} />*/}
             <MostPopular />
-            <Cta headline={'Find Events'} content={'Events text'} buttonText={'See Events'} />
+            {/*<Cta headline={'Find Events'} content={'Events text'} buttonText={'See Events'} />*/}
             <MostRecent />
         </section>
     );
