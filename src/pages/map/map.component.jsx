@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { baseUrl, offsetUrl, mapKey } from '../../shared/sharedKeys';
-import MapGL, { GeolocateControl, NavigationControl, Marker, Popup } from 'react-map-gl';
+import MapGL, { GeolocateControl, NavigationControl, Layer, Marker, Popup } from 'react-map-gl';
 import Loader from '../../components/utilities/loader.component';
 import MapTest from './maptest.component';
-import MapSearch from '../../components/map-search/map-search.component';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import parse from 'html-react-parser';
 import './map.styles.scss';
@@ -21,7 +20,7 @@ class Map extends Component {
                 longitude: -105.358887,
                 zoom: 7,
                 bearing: 0,
-                pitch: 60
+                pitch: 45
             },
             popupInfo: null,
             breweries:[]
@@ -69,26 +68,28 @@ class Map extends Component {
                             <img className='map-icon' src="./assets/hop-icon@2x.png" alt={`${parse(data[1].title.rendered)} Icon`}/>
                         </button>
                     </Marker>
-                    {popupInfo && ( 
-                        <Popup
-                            tipSize={10}
-                            anchor="top"
-                            offsetTop={35}
-                            latitude={parseFloat(popupInfo.acf.location.lat)}
-                            longitude={parseFloat(popupInfo.acf.location.long)}
-                            closeOnClick={false}
-                            onClose={() => this.setState({ popupInfo: null })}
-                        >
-                            <h6>{parse(popupInfo.title.rendered)}</h6>
-                            { popupInfo.content.rendered ? <p>{parse(popupInfo.content.rendered)}</p> : '' }
-                            { popupInfo.acf.location.website ?  <a href={popupInfo.acf.location.website} target="_blank" rel="noopener noreferrer">Website</a> : '' }
-                        </Popup>
-                    )}
+                    {
+                        popupInfo && ( 
+                            <Popup
+                                tipSize={10}
+                                anchor="top"
+                                offsetTop={35}
+                                latitude={parseFloat(popupInfo.acf.location.lat)}
+                                longitude={parseFloat(popupInfo.acf.location.long)}
+                                closeOnClick={false}
+                                onClose={() => this.setState({ popupInfo: null })}
+                            >
+                                <h6>{parse(popupInfo.title.rendered)}</h6>
+                                { popupInfo.content.rendered ? <p>{parse(popupInfo.content.rendered)}</p> : '' }
+                                { popupInfo.acf.location.website ?  <a href={popupInfo.acf.location.website} target="_blank" rel="noopener noreferrer">Website</a> : '' }
+                            </Popup>
+                        )
+                    }
                </div>
             ))
         );
     }
-
+   
     componentDidMount() {
         this.getMapBreweries();
     }
@@ -97,6 +98,41 @@ class Map extends Component {
 
         const { viewport, breweries } = this.state;
 
+        const building3d = {
+            'id': 'add-3d-buildings',
+            'source': 'composite',
+            'source-layer': 'building',
+            'filter': ['==', 'extrude', 'true'],
+            'type': 'fill-extrusion',
+            'minzoom': 15,
+            'paint': {
+                'fill-extrusion-color': '#aaa',
+                
+                // Use an 'interpolate' expression to
+                // add a smooth transition effect to
+                // the buildings as the user zooms in.
+                'fill-extrusion-height': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    15,
+                    0,
+                    15.05,
+                    ['get', 'height']
+                ],
+                'fill-extrusion-base': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    15,
+                    0,
+                    15.05,
+                    ['get', 'min_height']
+                ],
+                'fill-extrusion-opacity': 0.6
+            }
+        }
+
         return(
             <div>
                 <section className='map jumbotron-fluid d-flex align-items-start'>
@@ -104,25 +140,33 @@ class Map extends Component {
                         {...viewport}
                         width="100vw"
                         height="75vh"
-                        mapStyle="mapbox://styles/selceeus/ck5fzn67505341ilby3v1l6xs"
-                        onViewportChange={viewport => this.setState({viewport})}
+                        mapStyle='mapbox://styles/mapbox/light-v10'
+
+                        onViewportChange={
+                            viewport => this.setState({viewport})
+                        }
+
                         mapboxApiAccessToken={MAPBOX_TOKEN}
                         type="raster-dem"
                         url="mapbox://mapbox.mapbox-terrain-dem-v1"
-                        tileSize="512"
-                        maxZoom="16"
+                        tileSize="256"
+                        maxZoom="20"
                     >
-                        <div style={{position: 'absolute', top: 10, right: 10}}>
+                        <Layer {...building3d} />
+
+                        <div style={{position: 'absolute', top: 20, right: 20}}>
                                 <NavigationControl />
                         </div>
+
                         <GeolocateControl
                             style={{
                                 position: 'absolute',
                                 top: 100,
                                 right: 0,
-                                margin: 10,
+                                margin: 20,
                                 overflow: 'hidden'
                             }}
+
                             positionOptions={{enableHighAccuracy: true}}
                             fitBoundsOptions={{maxZoom: 5}}
                             trackUserLocation={true}
@@ -130,8 +174,6 @@ class Map extends Component {
                         {this.renderUIElements(breweries)}
                     </MapGL>
                 </section>
-                {/*<MapSearch />*/}
-                <MapTest />
             </div>
         );
     }
