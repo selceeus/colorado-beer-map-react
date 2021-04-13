@@ -3,6 +3,7 @@ import axios from 'axios';
 import { baseUrl, offsetUrl, mapKey } from '../../shared/sharedKeys';
 import MapGL, { GeolocateControl, NavigationControl, Marker, Popup } from 'react-map-gl';
 import Loader from '../../components/utilities/loader.component';
+import MapTest from './maptest.component';
 import MapSearch from '../../components/map-search/map-search.component';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import parse from 'html-react-parser';
@@ -20,7 +21,7 @@ class Map extends Component {
                 longitude: -105.358887,
                 zoom: 7,
                 bearing: 0,
-                pitch: 0
+                pitch: 60
             },
             popupInfo: null,
             breweries:[]
@@ -106,6 +107,10 @@ class Map extends Component {
                         mapStyle="mapbox://styles/selceeus/ck5fzn67505341ilby3v1l6xs"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={MAPBOX_TOKEN}
+                        type="raster-dem"
+                        url="mapbox://mapbox.mapbox-terrain-dem-v1"
+                        tileSize="512"
+                        maxZoom="16"
                     >
                         <div style={{position: 'absolute', top: 10, right: 10}}>
                                 <NavigationControl />
@@ -125,7 +130,8 @@ class Map extends Component {
                         {this.renderUIElements(breweries)}
                     </MapGL>
                 </section>
-                <MapSearch />
+                {/*<MapSearch />*/}
+                <MapTest />
             </div>
         );
     }
