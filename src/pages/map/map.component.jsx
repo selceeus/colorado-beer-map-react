@@ -139,7 +139,7 @@ class Map extends Component {
                     <MapGL
                         {...viewport}
                         width="100vw"
-                        height="75vh"
+                        height="95vh"
                         mapStyle='mapbox://styles/mapbox/light-v10'
 
                         onViewportChange={
