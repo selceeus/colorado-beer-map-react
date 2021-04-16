@@ -11,6 +11,9 @@
 # production
 /build
 
+# additonal project folders
+/exported-assets
+
 # misc
 .DS_Store
 .env

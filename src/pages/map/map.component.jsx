@@ -3,7 +3,6 @@ import axios from 'axios';
 import { baseUrl, offsetUrl, mapKey } from '../../shared/sharedKeys';
 import MapGL, { GeolocateControl, NavigationControl, Layer, Marker, Popup } from 'react-map-gl';
 import Loader from '../../components/utilities/loader.component';
-import MapTest from './maptest.component';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import parse from 'html-react-parser';
 import './map.styles.scss';

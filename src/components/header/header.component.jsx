@@ -47,7 +47,7 @@ class Header extends Component {
 
         return(
             <React.Fragment>
-                <Navbar dark role="navigation" sticky="top" color="secondary" expand="md" fixed="true">
+                <Navbar role="navigation" sticky="top" color="light" expand="md" fixed="true">
                     <div className="container-fluid">
                         <NavbarBrand className="mr-auto" href="/">Colorado Beer Map</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNav} />
