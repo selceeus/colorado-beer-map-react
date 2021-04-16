@@ -27,9 +27,11 @@ class Featured extends Component {
             });
     };
 
-    renderFeatures = apiData => {
+    renderFeatures = (apiData, state) => {
 
         const renderList = Object.entries(apiData);
+
+        const { sectionHeader } = this.state;
 
         if(!renderList.length > 0) {
             return <Loader />;

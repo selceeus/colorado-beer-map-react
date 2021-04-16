@@ -46,18 +46,16 @@ class Header extends Component {
         event.preventDefault();
     }
 
-    handleScroll=()=>{
+    handleScroll = () => {
+
         if (window.pageYOffset > 80) {
-            if(!this.state.className){
-              this.setState({ className: "scroll-background" });   
+            if( ! this.state.className) {
+                this.setState({ className: "scroll-background" });   
             }
-        }else{
-            if(this.state.className){
-              this.setState({ className: "" });
-            }
+        } else {
+            this.setState({ className: "" });
         }
-       
-      }
+    }
 
     render() {
 
