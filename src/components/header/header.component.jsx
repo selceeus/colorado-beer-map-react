@@ -14,7 +14,8 @@ class Header extends Component {
 
         this.state = {
             isNavOpen: false,
-            isModalOpen: false
+            isModalOpen: false,
+            className:"" 
         };
 
         this.toggleNav = this.toggleNav.bind(this);
@@ -22,6 +23,10 @@ class Header extends Component {
         this.handleLogin = this.handleLogin.bind(this);
 
     }
+
+    componentDidMount(){
+        window.addEventListener("scroll", this.handleScroll);
+      }
 
     toggleNav() {
         this.setState({
@@ -41,13 +46,26 @@ class Header extends Component {
         event.preventDefault();
     }
 
+    handleScroll=()=>{
+        if (window.pageYOffset > 80) {
+            if(!this.state.className){
+              this.setState({ className: "scroll-background" });   
+            }
+        }else{
+            if(this.state.className){
+              this.setState({ className: "" });
+            }
+        }
+       
+      }
+
     render() {
 
         const {isNavOpen, isModalOpen} = this.state;
 
         return(
             <React.Fragment>
-                <Navbar role="navigation" sticky="top" color="light" expand="md" fixed="true">
+                <Navbar role="navigation" sticky="top" color="light" expand="md" fixed="true" className={this.state.className}>
                     <div className="container-fluid">
                         <NavbarBrand className="mr-auto" href="/">Colorado Beer Map</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNav} />

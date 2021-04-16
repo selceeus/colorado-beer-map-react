@@ -21,5 +21,25 @@ nav {
 
     &.navbar {
         background-color: transparent !important;
+        display: block;
+        position: fixed;
+        width:100%;
+    }
+
+    &.scroll-background {
+        background-color: red!important;
+        animation: fadeSlow .15s ease-out .15s;
+        animation-fill-mode: backwards;
+    }
+}
+
+@keyframes fadeSlow {
+    0% {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
     }
 }
