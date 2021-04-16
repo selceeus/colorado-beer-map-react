@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Container, Jumbotron } from 'reactstrap';
 import CtaButton from '../utilities/cta-button.component';
 import './home-hero.styles.scss';

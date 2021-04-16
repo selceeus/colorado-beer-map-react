@@ -5,7 +5,7 @@ import {
     Modal, ModalHeader, ModalBody,
     Form, FormGroup ,Label, Input, Button
 } from 'reactstrap';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link} from 'react-router-dom';
 import './header.styles.scss';
 
 class Header extends Component {
@@ -15,18 +15,17 @@ class Header extends Component {
         this.state = {
             isNavOpen: false,
             isModalOpen: false,
-            className:"" 
+            className:""
         };
 
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
-
     }
 
     componentDidMount(){
         window.addEventListener("scroll", this.handleScroll);
-      }
+    }
 
     toggleNav() {
         this.setState({
@@ -55,6 +54,13 @@ class Header extends Component {
         } else {
             this.setState({ className: "" });
         }
+    }
+
+    //fix this
+    handleMapHeader = () => {
+
+        console.log('hello');
+        this.setState({ className: "scroll-background" }); 
     }
 
     render() {
@@ -161,7 +167,7 @@ class Header extends Component {
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/map">Map</NavLink>
+                                    <NavLink className="map-page nav-link" to={{ pathname: "/map"}}>Map</NavLink>
                                 </NavItem>
                                 <span className="navbar-text ml-auto">
                             </span>

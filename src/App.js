@@ -10,7 +10,7 @@ import DetailedListing from './pages/detailed-listing/detailed-listing.component
 import CityListing from './pages/city-listing/city-listing.component';
 import Contact from './pages/contact/contact.component';
 import Signup from './pages/sign-up/sign-up.component';
-import Footer from './components/footer/footer.component';
+//import Footer from './components/footer/footer.component';
 import './App.scss';
 
 class App extends Component {
