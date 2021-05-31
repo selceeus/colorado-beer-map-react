@@ -54,7 +54,7 @@ class App extends Component {
                 )} />
               </main>
           {/*<Footer />*/}
-          <StyleGuide />
+          {/*<StyleGuide />*/}
         </div>
       );
     }
