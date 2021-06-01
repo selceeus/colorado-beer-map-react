@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Loader from './components/utilities/loader.component';
 import Header from './components/header/header.component';
 import Homepage from './pages/homepage/homepage.component';
-import StyleGuide from './pages/style-guide/style-guide.component';
+//import StyleGuide from './pages/style-guide/style-guide.component';
 import Map from './pages/map/map.component';
 import DetailedListing from './pages/detailed-listing/detailed-listing.component';
 import CityListing from './pages/city-listing/city-listing.component';
